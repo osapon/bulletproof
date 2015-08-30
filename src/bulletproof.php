@@ -130,7 +130,7 @@ class Image implements \ArrayAccess
         }
 
         if (isset($this->_files[$offset]) && file_exists($this->_files[$offset]["tmp_name"])) {
-            $this->_files = $this->_files[$offset];
+            $this->_file = $this->_files[$offset];
             return true;
         }
         
@@ -248,7 +248,7 @@ class Image implements \ArrayAccess
      */
     public function getSize()
     {
-        return (int) $this->_files["size"];
+        return (int) $this->_file["size"];
     }
 
     /**
@@ -262,7 +262,7 @@ class Image implements \ArrayAccess
             return $this->height;
         }
 
-        list(, $height) = getImageSize($this->_files["tmp_name"]); 
+        list(, $height) = getImageSize($this->_file["tmp_name"]); 
         return $height;
     }
 
@@ -277,7 +277,7 @@ class Image implements \ArrayAccess
             return $this->width;
         }
 
-        list($width) = getImageSize($this->_files["tmp_name"]); 
+        list($width) = getImageSize($this->_file["tmp_name"]); 
         return $width;
     }
 
@@ -345,7 +345,7 @@ class Image implements \ArrayAccess
     {
         /* modify variable names for convenience */
         $image = $this; 
-        $files = $this->_files;
+        $files = $this->_file;
 
         /* initialize image properties */
         $image->name     = $image->getName();
